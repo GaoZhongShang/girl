@@ -11,7 +11,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build Web Frontend
+        run: |
+          npm install --legacy-peer-deps
+          npx vite build
+
+      - name: Deploy to ECS
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.ECS_HOST }}
@@ -27,11 +40,22 @@ jobs:
 
             echo ">>> Installing Python dependencies..."
             cd backend
-            python3 -m venv venv
+            python3.11 -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt --quiet
 
-            echo ">>> Restarting backend service..."
+            echo ">>> Restarting backend..."
             sudo systemctl restart corp-assistant
 
             echo ">>> Deploy done!"
+
+      - name: Upload Web Frontend
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.ECS_HOST }}
+          username: ${{ secrets.ECS_USERNAME }}
+          key: ${{ secrets.ECS_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.ECS_PORT || 22 }}
+          source: dist/
+          target: /var/www/corp-assistant/
+          overwrite: true

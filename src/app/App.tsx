@@ -1016,7 +1016,7 @@ function CategoryListScreen({
                 <button className="flex-1 py-2.5 flex items-center justify-center gap-1 text-xs text-[#64748B] border-r border-[#F1F5F9]">
                   <Edit2 size={12} />编辑
                 </button>
-                button
+                <button
                   onClick={() => {
                     if (hasDevices) {
                       setErrMsg(
