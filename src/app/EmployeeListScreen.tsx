@@ -17,7 +17,7 @@ export default function EmployeeListScreen({ onAdd, onView, onEdit }: Props) {
   const loadEmployees = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/users');
+      const response = await fetch('/api/users');
       if (response.ok) {
         const result = await response.json();
         if (result.code === 200) {
@@ -41,7 +41,7 @@ export default function EmployeeListScreen({ onAdd, onView, onEdit }: Props) {
           text: '删除',
           onPress: async () => {
             try {
-              const response = await fetch(`http://localhost:5000/api/users/${id}`, {
+              const response = await fetch(`/api/users/${id}`, {
                 method: 'DELETE',
               });
               if (response.ok) {
