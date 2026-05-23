@@ -1,0 +1,17 @@
+[Unit]
+Description=Corp Assistant Backend
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/corp-assistant/backend
+ExecStart=/opt/corp-assistant/backend/venv/bin/python /opt/corp-assistant/backend/run.py
+Restart=always
+RestartSec=5
+Environment="FLASK_ENV=production"
+Environment="JWT_SECRET=change-me-to-a-random-string"
+Environment="DATABASE_URL=sqlite:////opt/corp-assistant/backend/corp_assistant.db"
+
+[Install]
+WantedBy=multi-user.target

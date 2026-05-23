@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+.pnp/
+
+# Expo
+.expo/
+dist/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+
+# Android
+android/app/build/
+android/.gradle/
+android/build/
+android/local.properties
+
+# iOS
+ios/Pods/
+ios/build/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+*.db
+
+# Logs
+*.log
+
+# Backup files
+*.backup
+
+# EAS
+.easignore
